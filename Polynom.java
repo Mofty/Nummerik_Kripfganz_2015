@@ -1,70 +1,40 @@
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.Scanner;
 
-
-
-public class Polynom {
-
-	private double koeffizienten[] = { 0.0 }; // Null-Polynom
+public class Polynom{
+	
+	public double[] koeffizienten;
 
 	public Polynom(double[] koeffizienten) {
 		this.koeffizienten = koeffizienten;
 	}
+	
+	public double getKoeffizient(int stelle) {
+		return koeffizienten[stelle];
+	}
+	
+	public int getDegree() {
+		return koeffizienten.length - 1;
 
-	public Polynom getDerivative() {
-		Polynom ableitung = null;
-
-		if (getDegree() > 0) {
-			double[] koeffizientenDerAbleitung = new double[koeffizienten.length - 1];
-			for (int i = 1; i < koeffizienten.length; i++) {
-				koeffizientenDerAbleitung[i - 1] = koeffizienten[koeffizienten.length - i - 1] * i;
-			}
-			ableitung = new Polynom(koeffizientenDerAbleitung);
-		} else {
-			ableitung = new Polynom();
-		}
-
-		return ableitung;
 	}
 
-	public Polynom() {
-	}
-
-	public double getValue(double x) {
+	public double getValue(double x){
 		double funktionsWert = 0.0;
 
 		for (int i = getDegree(); i >= 0; i--) {
 			funktionsWert *= x;
-			System.out.println(i + " " + funktionsWert);
 			funktionsWert += getKoeffizient(i);
-			System.out.println(i + " " + getKoeffizient(i));
 		}
 
 		return funktionsWert;
 	}
 
-	public int getDegree() {
-		return this.koeffizienten.length - 1;
-
-	}
-
-	public double getKoeffizient(int stelle) {
-		return koeffizienten[stelle];
-	}
-
-	public double getRoot(double start, double precision, int iterations) {
-		Polynom ableitung = getDerivative();
-
-		int i = 1;
-		do {
-			i++;
-			start = start - (getValue(start) / ableitung.getValue(start));
-			System.out.println(i - 1 + ": " + start);
-		} while ((Math.abs(getValue(start)) > precision) && i <= iterations);
-		return start;
-
-	}
+//	@Override
+//	public String toString() {
+//		String result = "0";
+//		for (int i = 0; i < Polynom.getDegree() + 1; i++) {
+//			result += " + " + koeffizienten[i] + " * x ^ " + (Polynom.getDegree() - i);
+//		}
+//		return result;
+//	}
 
 	@Override
 	public String toString() {
@@ -101,38 +71,4 @@ public class Polynom {
 		return "";
 	}
 
-	public static void main(String[] args) {
-		double x = 2;
-		double[] test1 = new double[8];
-		int n = 0;
-		Scanner in = null;
-		try {
-			in = new Scanner(new FileReader("Daten8B.txt"));
-		  } catch (FileNotFoundException e) {
-		   e.printStackTrace();
-		  }
-	
-		  while (in.hasNext()) {
-		   String input = (String) in.next();
-		   test1[n] = Double.parseDouble(input);
-		   n++;
-		  }
-		Polynom poly1 = new Polynom(test1);
-
-		System.out.println("Polynom " + poly1.getDegree() + ". Grades");
-		System.out.println(poly1);
-
-		System.out.println("_____________________");
-		System.out.println("1. Ableitung:");
-		System.out.println(poly1.getDerivative());
-		System.out.println("_____________________");
-		System.out.println("Funktionswert an der Stelle: " + x + " beträgt: \n"
-				+ "f(" + x + ")=" + poly1.getValue(x));
-		System.out.println("_____________________");
-		System.out.println("Newton-Verfahren x - f(x)/ f '(x)");
-		System.out.println(poly1.getRoot(0.1, 0.000001, 100));
-
-		System.out.println();
-
-	}
 }
