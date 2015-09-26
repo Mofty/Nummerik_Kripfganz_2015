@@ -1,25 +1,18 @@
 
 public class ReelleNullstelle {
-	public static double getRoot(double start, double precision, int iterations, Polynom poly) {
-		double x1 = 1;
-		double x2 = -1;
+	public static Complex getRoot(Complex start, double precision, int iterations, Polynom poly) throws InternalError {
 		Polynom ableitung = Ableitung.getDerivative(poly);
 
-
 		for (int i = 0; i < iterations; i++) {
-			double dx = poly.getValue(start) / ableitung.getValue(start);
-			start -= dx;
+			Complex dx = Complex.div(poly.getValue(start), ableitung.getValue(start));
+			start = Complex.subtr(start, dx);
 			System.out.println(i + " : " + start);
-			if ((x1 - start) * (start - x2) < 0.0) {
-				System.out.println("kaputt lol");
-				return 0;
-			}
-			if (Math.abs(dx) < precision) {
+			if (Complex.abs(dx) < precision) {
 				return start;
 			}
 		}
 		System.out.println("max itteration erreicht"); //error
-		return 0;
+		throw new InternalError();
 
 	}
 }

@@ -4,13 +4,13 @@ import java.util.Scanner;
 
 public class ReadFile {
 
-	static public double[] readfile() {
+	static public double[] readfile(String path) {
 
 		double[] test1 = new double[8];
 		int n = 0;
 		Scanner in = null;
 		try {
-			in = new Scanner(new FileReader("Daten8B.txt"));
+			in = new Scanner(new FileReader(path));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}

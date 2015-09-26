@@ -16,12 +16,12 @@ public class Polynom{
 
 	}
 
-	public double getValue(double x){
-		double funktionsWert = 0.0;
+	public Complex getValue(Complex x){
+		Complex funktionsWert = Complex.zero();
 
 		for (int i = getDegree(); i >= 0; i--) {
-			funktionsWert *= x;
-			funktionsWert += getKoeffizient(i);
+			funktionsWert = Complex.mult(funktionsWert, x);
+			funktionsWert = Complex.sum(funktionsWert, Complex.fromReal(getKoeffizient(i)));
 		}
 
 		return funktionsWert;
@@ -30,8 +30,8 @@ public class Polynom{
 //	@Override
 //	public String toString() {
 //		String result = "0";
-//		for (int i = 0; i < Polynom.getDegree() + 1; i++) {
-//			result += " + " + koeffizienten[i] + " * x ^ " + (Polynom.getDegree() - i);
+//		for (int i = 0; i < getDegree() + 1; i++) {
+//			result += " + " + koeffizienten[i] + " * x ^ " + (getDegree() - i);
 //		}
 //		return result;
 //	}

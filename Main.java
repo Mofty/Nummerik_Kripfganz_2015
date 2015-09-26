@@ -2,9 +2,9 @@
 public class Main {
 
 	public static void main(String[] args) {
-		double x = 1;
+		Complex x = new Complex(1, 0);
 
-		double[] test1 = ReadFile.readfile();
+		double[] test1 = ReadFile.readfile(args[0]);
 
 		Polynom poly = new Polynom(test1);
 
@@ -19,7 +19,18 @@ public class Main {
 				+ "f(" + x + ")=" + poly.getValue(x));
 		System.out.println("_____________________");
 		System.out.println("Newton-Verfahren x - f(x)/ f '(x)");
-		System.out.println(ReelleNullstelle.getRoot(0.0, 0.000001, 100000, poly));
+		System.out.println("Real");
+		System.out.println(ReelleNullstelle.getRoot(new Complex(0, 0), 0.000001, 100000, poly));
+		System.out.println("Imaginär 1");
+		System.out.println(ReelleNullstelle.getRoot(new Complex(0, 1), 0.000001, 100000, poly));
+		System.out.println("Imaginär 2");
+		System.out.println(ReelleNullstelle.getRoot(new Complex(0, -1), 0.000001, 100000, poly));
+		System.out.println("Imaginär 3");
+		System.out.println(ReelleNullstelle.getRoot(new Complex(1, 1), 0.000001, 100000, poly));
+		System.out.println("Imaginär 4");
+		System.out.println(ReelleNullstelle.getRoot(new Complex(-1, 1), 0.000001, 100000, poly));
+		System.out.println("Imaginär 5");
+		System.out.println(ReelleNullstelle.getRoot(new Complex(-1, -1), 0.000001, 100000, poly));
 
 		System.out.println();
 

@@ -73,6 +73,10 @@ public class Complex {
 	public static Complex getI() {
 		return i;
 	}
+	
+	public static Complex zero() {
+		return nichts;
+	}
 
 	public static Complex fromReal(double r) {
 		return new Complex(r, 0);
@@ -82,4 +86,6 @@ public class Complex {
 	}
 
 	private static Complex i = new Complex(0, 1);
+
+	private static Complex nichts = new Complex(0, 0);
 }
