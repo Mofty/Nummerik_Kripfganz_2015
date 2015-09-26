@@ -1,23 +1,20 @@
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.InputStream;
 import java.util.Scanner;
 
 public class ReadFile {
 
 	static public double[] readfile(String path) {
+		
+		InputStream input = Main.class.getResourceAsStream(path);
 
 		double[] test1 = new double[8];
 		int n = 0;
 		Scanner in = null;
-		try {
-			in = new Scanner(new FileReader(path));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		in = new Scanner(input);
 
 		while (in.hasNext()) {
-			String input = (String) in.next();
-			test1[n] = Double.parseDouble(input);
+			String inp = (String) in.next();
+			test1[n] = Double.parseDouble(inp);
 			n++;
 		}
 		in.close();
